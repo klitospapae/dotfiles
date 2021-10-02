@@ -1,6 +1,8 @@
+if has("win32")
 "allow windows keybinds 
 source $VIMRUNTIME/mswin.vim
 behave mswin
+endif
 
 """"""""""plugins"""""""""" 
 call plug#begin('~/.vim/plugged')
@@ -38,7 +40,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 let mapleader = ' '
 
 """""""""""user commands""""""""""" 
-nmap <leader>so :source $HOME/_vimrc<CR>
+nmap <leader>so :source $HOME/.vimrc<CR>
 nmap <leader>n :set number!<CR>
 nmap <leader>r :set relativenumber!<CR>
 nmap <leader>hl :let @/ = ""<CR>
