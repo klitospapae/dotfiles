@@ -46,8 +46,7 @@ nmap <leader>r :set relativenumber!<CR>
 nmap <leader>hl :let @/ = ""<CR>
 nmap <leader>sc :set spell!<CR>
 "nmap <leader>md :
-nmap <leader>gn <plug>(signify-next-hunk)
-nmap <leader>gN <plug>(signify-prev-hunk)
+nnoremap <leader>cw a<C-X><C-S>
 
 nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
