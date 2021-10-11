@@ -95,3 +95,10 @@ set smartcase " ...unless it includes caps
 set nocompatible "stops trying to be vi 
 set splitbelow splitright "splits happen below or to the right 
 set spelllang=en_gb
+
+"""""""""""file dependent behaviour""""""""""
+autocmd BufRead,BufNewFile *.sv,*.svh,*.v call SVindent()
+func SVindent()
+    set nosmartindent
+    set autoindent
+endfunc
