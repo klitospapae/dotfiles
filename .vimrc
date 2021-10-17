@@ -12,11 +12,14 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'mhinz/vim-startify'
+Plug 'vhda/verilog_systemverilog.vim'
 
+"git-related
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'vim-airline/vim-airline'
 
+"nerdtree-related
 Plug 'preservim/nerdtree' 
 Plug 'scrooloose/nerdtree-project-plugin' 
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
