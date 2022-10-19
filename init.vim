@@ -20,9 +20,9 @@ Plug 'mhinz/vim-signify'
 Plug 'vim-airline/vim-airline'
 
 "nerdtree-related
-Plug 'preservim/nerdtree' 
-Plug 'scrooloose/nerdtree-project-plugin' 
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'preservim/nerdtree' 
+"Plug 'scrooloose/nerdtree-project-plugin' 
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 call plug#end()
 
@@ -43,7 +43,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 let mapleader = ' '
 
 """""""""""user commands""""""""""" 
-nmap <leader>so :source $HOME/.vimrc<CR>
+nmap <leader>so :source $HOME/.config/nvim/init.vim<CR>
 nmap <leader>n :set number!<CR>
 nmap <leader>r :set relativenumber!<CR>
 nmap <leader>hl :let @/ = ""<CR>
@@ -51,8 +51,8 @@ nmap <leader>sc :set spell!<CR>
 "nmap <leader>md :
 nnoremap <leader>cw a<C-X><C-S>
 
-nmap <leader>nt :NERDTreeToggle<CR>
-nmap <leader>nf :NERDTreeFind<CR>
+"nmap <leader>nt :NERDTreeToggle<CR>
+"nmap <leader>nf :NERDTreeFind<CR>
 
 nmap <C-h> :wincmd h<CR>
 nmap <C-j> :wincmd j<CR>

@@ -1,0 +1,25 @@
+---
+  - name: arch_jack_playbook
+    hosts: arch
+    tasks:
+
+      - name: Upgrade system, equivalent to "pacman -Syu"
+        pacman:
+          update_cache: yes
+          upgrade: yes
+
+      - name: Install jack2
+        pacman:
+          name: jack2
+          state: latest
+          force: yes
+
+      - name: Install cadence
+        pacman:
+          name: cadence
+          state: latest
+
+      - name: Install ardour
+        pacman:
+          name: ardour
+          state: latest
