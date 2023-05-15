@@ -7,12 +7,15 @@ endif
 """"""""""plugins"""""""""" 
 call plug#begin('~/.vim/plugged')
 
+Plug 'morhetz/gruvbox'
+
 Plug 'frazrepo/vim-rainbow' 
-Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'mhinz/vim-startify'
 Plug 'vhda/verilog_systemverilog.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 "git-related
 Plug 'tpope/vim-fugitive'
@@ -37,7 +40,6 @@ let g:airline_detect_iminsert=0
 let g:airline_inactive_alt_sep=1
 let g:airline_stl_path_style = 'short'
 
-let g:ctrlp_clear_cache_on_exit = 0
 
 "set leader for user commands 
 let mapleader = ' '
@@ -53,6 +55,8 @@ nnoremap <leader>cw a<C-X><C-S>
 
 "nmap <leader>nt :NERDTreeToggle<CR>
 "nmap <leader>nf :NERDTreeFind<CR>
+
+nmap <leader>ff :Telescope find_files<CR>
 
 nmap <C-h> :wincmd h<CR>
 nmap <C-j> :wincmd j<CR>
@@ -74,7 +78,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 """""""""""syntax highlighting""""""""""
 syntax enable 
-color koehler 
+colorscheme gruvbox 
 set bg=dark 
 if has("gui_running") 
 	set guifont=Consolas:h10:cDEFAULT 
@@ -98,7 +102,8 @@ set smartcase " ...unless it includes caps
 set nocompatible "stops trying to be vi 
 set splitbelow splitright "splits happen below or to the right 
 set spelllang=en_gb
-
+set mouse=r "allow copy pasting
+ 
 """""""""""file dependent behaviour""""""""""
 autocmd BufRead,BufNewFile *.sv,*.svh,*.v call SVindent()
 func SVindent()

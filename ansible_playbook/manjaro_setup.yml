@@ -1,138 +1,59 @@
 ---
   - name: manjaro_setup
-    hosts: '{{host}}'
+    hosts: localhost
     become: yes
-    become_user: root
-    become_method: su
     gather_facts: yes
     serial: 1
     tasks:
 
-      # update and upgrade system
-      - name: Upgrade system, equivalent to "pacman -Syu"
-        pacman:
-          update_cache: yes upgrade: yes
+      - name: Install stuffs
+        pacman: pkg={{ item }}
+        with_items:
+          - yay
+          - i3-gaps
+          - i3status
+          - i3blocks
+          - dmenu
+          - zsh
+          - rxvt-unicode
+          - vim
+          - neovim
+          - unclutter
+          - firefox
+          - zathura
+          - discord
+          - ttf-caladea 
+          - ttf-carlito
+          - ttf-dejavu
+          - ttf-liberation
+          - ttf-linux-libertine-g
+          - noto-fonts
+          - adobe-source-code-pro-fonts
+          - adobe-source-sans-pro-fonts
+          - adobe-source-serif-pro-fonts
+          - libreoffice-still
+          - steam
+          - python-gpgme
+          - jack2
+          - pulseaudio-jack
+          - cadence
+          - guitarix
+          - freecad
+          - kicad
+          - lutris
+          - xorg-server
+          - xorg-xinit
+          - autorandr
+          - feh
+          - patch
+          - arduino
+          - bluez-utils
 
-      - name: Setup hdd auto-mount
-        ansible.builtin.shell: |
-          sudo mkdir /mnt/hdd1
-          sudo echo "" >> /etc/fstab
-          sudo echo "# HDD" >> /etc/fstab
-          sudo echo "/dev/sda3 /mnt/hdd1 ntfs defaults,uid=1000,gid=1000 0 2" >> /etc/fstab
 
-      - name: Install yay
-        pacman:
-          name: yay
-          state: latest
-
-      - name: Install i3-gaps
-        pacman:
-          name: i3-gaps
-          state: latest
-
-      - name: Install i3status
-        pacman:
-          name: i3status
-          state: latest
-
-      - name: Install i3status font
-        pacman:
-          name: ttf-dejavu
-          state: latest
-
-      - name: Install zsh
-        pacman:
-          name: zsh
-          state: latest
-
-      - name: Install oh-my-zsh
+      - name: Install dotfiles
         ansible.builtin.shell:
-          cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-          chdir: ~/Downloads/
-
-      - name: Install urxvt
-        pacman:
-          name: rxvt-unicode
-          state: latest
-
-      - name: Install vim
-        pacman:
-          name: vim
-          state: latest
-
-      - name: Install nvim
-        pacman:
-          name: neovim
-          state: latest
-
-      - name: Install unclutter
-        pacman:
-          name: unclutter
-          state: latest
-
-      - name: Clone github-cli
-        community.general.pacman:
-          name: github-cli
-          state: latest
-          executable: yay
-
-      - name: Install firefox
-        pacman:
-          name: firefox
-          state: latest
-
-      - name: Install zathura
-        pacman:
-          name: zathura
-          state: latest
-
-      - name: Install discord
-        pacman:
-          name: discord
-          state: latest
-
-      - name: Install libreoffice prerequisites
-        pacman:
-          name: ttf-caladea, ttf-carlito, ttf-dejavu, ttf-liberation, ttf-linux-libertine-g, noto-fonts, adobe-source-code-pro-fonts, adobe-source-sans-pro-fonts, adobe-source-serif-pro-fonts
-          state: latest
-
-      - name: Install another libreoffice ttf
-        community.general.pacman:
-          name: ttf-gentium-basic
-          state: latest
-          executable: yay
-
-      - name: Install libreoffice
-        pacman:
-          name: libreoffice-still
-          state: latest
-
-      - name: Install steam
-        pacman:
-          name: steam
-          state: latest
-
-      - name: Install dropbox prerequisite
-        pacman:
-          name: python-gpgme
-          state: latest
-
-      - name: Install jack2
-        pacman:
-          name: jack2
-          state: latest
-          force: yes
-
-      - name: Install cadence
-        pacman:
-          name: cadence
-          state: latest
-
-      - name: Install guitarix
-        pacman:
-          name: guitarix
-          state: latest
-
+          cmd: cd /home/kp/dotfiles && sh /home/kp/setup.sh
+          
       - name: Setup audio group
         ansible.builtin.shell: |
           sudo groupadd audio
@@ -142,32 +63,20 @@
           sudo ehco "@audio - rtprio 95" >> /etc/security/limits.conf
           sudo ehco "@audio - memlock unlimited" >> /etc/security/limits.conf
 
-      - name: Install FreeCAD
-        pacman:
-          name: freecad
-          state: latest
-
-      - name: Install KiCAD
-        pacman:
-          name: kicad
-          state: latest
-
-      - name: Install lutris
-        pacman:
-          name: lutris
-          state: latest
-
-      - name: Install heroic
-        pacman:
-          name: heroic-games-launcher-bin
-          state: latest
-
-      - name: Clone dotfiles
-        git: 
-          repo: https://github.com/klitospapae/dotfiles
-          dest: ~/
-          clone: yes
-
-      - name: Install dotfiles
+      - name: Add user to uucp group for arduino serial
         ansible.builtin.shell:
-          cmd: sh ~/setup.sh
+          cmd: sudo usermod -a -G uucp kp
+
+
+
+          # TODO
+          # echo "blacklist pcspkr" | sudo tee /etc/modprobe.d/nobeep.conf 
+          # zsh-autosuggestions git clone
+          # zsh-syntax-highlighting git clone
+          # vim plug
+          # heroic store aur
+          # dropbox-cli aur
+          # calibre aur
+          # prusa-slicer aur
+          # wine-stable aur
+          # bluez-rfcomm aur
